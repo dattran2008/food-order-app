@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { Layout } from 'antd';
+import 'antd/dist/antd.css';
+
+// Layout
+import HeaderContent from './layouts/Header.jsx';
+import FooterContent from './layouts/Footer';
+
+// Meals
+import MealIntro from './components/meals/index.jsx';
+import MealList from './components/meals/item/index.jsx';
+
+const { Header, Content, Footer } = Layout;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout className='layout'>
+      <Header id='menu' style={{ height: '100%' }}>
+        <HeaderContent />
+      </Header>
+      <Content style={{ padding: '100px 50px' }}>
+        <MealIntro />
+        <div className='site-layout-content'>
+          <MealList />
+        </div>
+      </Content>
+      <Footer style={{ textAlign: 'center' }}>
+        <FooterContent />
+      </Footer>
+    </Layout>
   );
 }
 

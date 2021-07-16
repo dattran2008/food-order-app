@@ -1,0 +1,30 @@
+.site-layout-content {
+  min-height: 280px;
+  padding: 24px;
+  background: #fff;
+}
+#menu .logo {
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.cart-item {
+  margin-left: auto;
+  background-color: #fa6400 !important;
+  color: white !important;
+}
+
+.ant-btn.ant-btn-default.ant-btn-lg:hover {
+  color: #fa6400 !important;
+}
+
+.ant-menu > .ant-menu-item:hover,
+.ant-menu > .ant-menu-item-active,
+.ant-menu > .ant-menu-item-open,
+.ant-menu > .ant-menu-item-selected {
+  color: #fa6400 !important;
+  background-color: white !important;
+}
