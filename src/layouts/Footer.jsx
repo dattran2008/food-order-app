@@ -1,5 +1,5 @@
 const PageFooter = () => {
-  return 'Ant Design ©2018 Created by Ant UED';
+  return 'Yum Meal ©2021 created by dattran2008';
 };
 
 export default PageFooter;

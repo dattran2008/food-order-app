@@ -1,9 +1,34 @@
-import { Button, Menu, Image, Badge } from 'antd';
-import { ShoppingCartOutlined } from '@ant-design/icons';
+import { useState } from 'react';
+import { Menu, Image } from 'antd';
 import './Header.css';
+
 import Logo from '../assets/images/logo.png';
 
+//Cart Item
+import CartItem from '../components/cart/index.jsx';
+import CartProvider from '../store/CartProvider';
+
 const PageHeader = () => {
+  const [visible, setVisible] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const handleOk = () => {
+    setConfirmLoading(true);
+    setTimeout(() => {
+      setVisible(false);
+      setConfirmLoading(false);
+    }, 2000);
+  };
+
+  const handleCancel = () => {
+    console.log('Clicked cancel button');
+    setVisible(false);
+  };
+
   return (
     <>
       <div className='logo'>
@@ -13,21 +38,15 @@ const PageHeader = () => {
         <Menu.Item key='menu'>Menu</Menu.Item>
         <Menu.Item key='list'>List</Menu.Item>
         <Menu.Item key='cart' className='cart-item'>
-          <Button
-            type='default'
-            icon={<ShoppingCartOutlined />}
-            size='large'
-            style={{ border: 'none', background: 'none' }}
-          >
-            Cart
-            <Badge
-              count={5}
-              offset={[10, -5]}
-              style={{
-                backgroundColor: '#2db7f5',
-              }}
-            ></Badge>
-          </Button>
+          <CartProvider>
+            <CartItem
+              visible={visible}
+              showModal={showModal}
+              confirmLoading={confirmLoading}
+              handleOk={handleOk}
+              handleCancel={handleCancel}
+            />
+          </CartProvider>
         </Menu.Item>
       </Menu>
     </>
