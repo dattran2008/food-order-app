@@ -1,43 +1,34 @@
-import { Card, Col, Row } from 'antd';
-import FormInput from './ItemInput.jsx';
+import { useContext } from 'react';
+import { Card, Col } from 'antd';
 
-const DUMMY_MEALS = [
-  {
-    id: 'm1',
-    name: 'Sushi',
-    description: 'Finest fish and veggies',
-    price: 22.99,
-  },
-  {
-    id: 'm2',
-    name: 'Schnitzel',
-    description: 'A german speciality',
-    price: 16.5,
-  },
-  {
-    id: 'm3',
-    name: 'Bun Bo',
-    description: 'A vietnamese noodle',
-    price: 20.0,
-  },
-];
+// Form Input
+import MealItemForm from '../item/ItemForm.jsx';
+
+//Context
+import CartContext from '../../../store/CartContext.js';
 
 const MealItem = (props) => {
-  const mealsList = DUMMY_MEALS.map((it, index) => {
-    return (
-      <Col key={index} span={8}>
-        <Card title={it.name} bordered={false}>
-          <li>
-            <div>{it.description}</div>
-            <div>Price: {it.price}</div>
-          </li>
-          <FormInput id={props.id} />
-        </Card>
-      </Col>
-    );
-  });
+  const cartContext = useContext(CartContext);
 
-  return <Row gutter={16}>{mealsList}</Row>;
+  const addToCartHandler = (amount) => {
+    cartContext.addItem({
+      id: props.id,
+      name: props.name,
+      amount: amount,
+      price: props.price,
+    });
+  };
+
+  return (
+    <Col span={8}>
+      <Card title={props.name} bordered={false}>
+        <li>
+          <div>{props.description}</div>
+          <div>Price: {props.price.toFixed(2)}</div>
+        </li>
+        <MealItemForm id={props.id} onAddToCart={addToCartHandler} />
+      </Card>
+    </Col>
+  );
 };
-
 export default MealItem;

@@ -6,7 +6,6 @@ import Logo from '../assets/images/logo.png';
 
 //Cart Item
 import CartItem from '../components/cart/index.jsx';
-import CartProvider from '../store/CartProvider';
 
 const PageHeader = () => {
   const [visible, setVisible] = useState(false);
@@ -38,15 +37,13 @@ const PageHeader = () => {
         <Menu.Item key='menu'>Menu</Menu.Item>
         <Menu.Item key='list'>List</Menu.Item>
         <Menu.Item key='cart' className='cart-item'>
-          <CartProvider>
-            <CartItem
-              visible={visible}
-              showModal={showModal}
-              confirmLoading={confirmLoading}
-              handleOk={handleOk}
-              handleCancel={handleCancel}
-            />
-          </CartProvider>
+          <CartItem
+            visible={visible}
+            showModal={showModal}
+            confirmLoading={confirmLoading}
+            handleOk={handleOk}
+            handleCancel={handleCancel}
+          />
         </Menu.Item>
       </Menu>
     </>
