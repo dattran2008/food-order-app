@@ -1,6 +1,9 @@
 import { Button, Badge, Modal } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { useContext } from 'react';
+
+//Cart
+import CartItem from './item.jsx';
 import CartContext from '../../store/CartContext';
 
 const Cart = (props) => {
@@ -11,6 +14,15 @@ const Cart = (props) => {
   const numberOfCartItems = items.reduce((curNumber, item) => {
     return curNumber + item.amount;
   }, 0);
+
+  const cartItems = (
+    <ul>
+      {items.map((item) => {
+        console.log('Cart item: ', item);
+        return <CartItem key={item.id} item={item} />;
+      })}
+    </ul>
+  );
 
   return (
     <>
@@ -39,8 +51,13 @@ const Cart = (props) => {
         onCancel={props.handleCancel}
         okText='Order'
         okButtonProps={items.length <= 0 && { style: { display: 'none' } }}
+        bodyStyle={{ fontSize: '16px' }}
       >
-        <p>Total amount: {cartCtx.amount.toFixed(2)}</p>
+        {cartItems}
+        <div style={{ textAlign: 'right' }}>
+          <label>Total amount:</label>
+          <span style={{ marginLeft: '5px', color: '#fa6400', fontSize: '18px' }}>${cartCtx.amount.toFixed(2)}</span>
+        </div>
       </Modal>
     </>
   );
