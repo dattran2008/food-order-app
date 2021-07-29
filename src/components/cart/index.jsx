@@ -8,18 +8,26 @@ import CartContext from '../../store/CartContext';
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
-
   const { items } = cartCtx;
 
   const numberOfCartItems = items.reduce((curNumber, item) => {
     return curNumber + item.amount;
   }, 0);
 
+  const addCartItemHandler = (item) => {
+    cartCtx.addItem(item);
+  };
+
+  const removeCartItemHandler = (id) => {
+    cartCtx.removeItem(id);
+  };
+
   const cartItems = (
     <ul>
       {items.map((item) => {
-        console.log('Cart item: ', item);
-        return <CartItem key={item.id} item={item} />;
+        return (
+          <CartItem key={item.id} item={item} addCartItem={addCartItemHandler} removeCartItem={removeCartItemHandler} />
+        );
       })}
     </ul>
   );
@@ -44,7 +52,7 @@ const Cart = (props) => {
         ></Badge>
       </Button>
       <Modal
-        title='Meal'
+        title='Your meal order'
         visible={props.visible}
         confirmLoading={props.confirmLoading}
         onOk={props.handleOk}

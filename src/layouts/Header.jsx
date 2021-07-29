@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Menu, Image } from 'antd';
-import './Header.css';
+import classes from './Header.module.css';
 
 import Logo from '../assets/images/logo.png';
 
@@ -24,19 +24,18 @@ const PageHeader = () => {
   };
 
   const handleCancel = () => {
-    console.log('Clicked cancel button');
     setVisible(false);
   };
 
   return (
     <>
-      <div className='logo'>
+      <div className={classes.logo}>
         <Image width='30' src={Logo} alt='Logo' preview={false} />
       </div>
-      <Menu theme='dark' mode='horizontal' defaultSelectedKeys={['1']} style={{ alignItems: 'center' }}>
+      <Menu id='menu' theme='dark' mode='horizontal' defaultSelectedKeys={['1']} style={{ alignItems: 'center' }}>
         <Menu.Item key='menu'>Menu</Menu.Item>
         <Menu.Item key='list'>List</Menu.Item>
-        <Menu.Item key='cart' className='cart-item'>
+        <Menu.Item key='cart' className={classes['cart-item']}>
           <CartItem
             visible={visible}
             showModal={showModal}

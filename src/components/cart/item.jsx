@@ -17,9 +17,29 @@ const CartItem = (props) => {
             key={item.id}
             actions={[
               <>
-                <Button size='small' htmlType='submit' icon={<MinusOutlined />}></Button>
-                <InputNumber size='small' min={1} max={10} defaultValue={item.amount} style={{ margin: '0 5px' }} />
-                <Button size='small' htmlType='submit' icon={<PlusOutlined />}></Button>
+                <Button
+                  size='small'
+                  htmlType='button'
+                  icon={<MinusOutlined />}
+                  onClick={() => props.removeCartItem(item.id)}
+                ></Button>
+                <InputNumber
+                  size='small'
+                  min={1}
+                  max={10}
+                  defaultValue={item.amount}
+                  style={{ margin: '0 5px' }}
+                  onChange={(val) => {
+                    item = { ...item, amount: val };
+                    console.log('Change:', item);
+                  }}
+                />
+                <Button
+                  size='small'
+                  htmlType='button'
+                  icon={<PlusOutlined />}
+                  onClick={() => props.addCartItem(item)}
+                ></Button>
               </>,
             ]}
           >
@@ -34,7 +54,7 @@ const CartItem = (props) => {
               title={<a href={item.href}>{item.name}</a>}
             />
             <div style={{ position: 'absolute', left: '88%' }}>
-              <span style={{ fontSize: '16px' }}>${item.price.toFixed(2)}</span>
+              <span style={{ fontSize: '16px' }}>${item.price}</span>
             </div>
           </List.Item>
         );
